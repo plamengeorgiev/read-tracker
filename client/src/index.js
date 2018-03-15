@@ -30,7 +30,7 @@ store.dispatch(loadAuthors());
 render((
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <Route render={props => <App {...props}  />}/>
     </BrowserRouter>
   </Provider>
   ), 

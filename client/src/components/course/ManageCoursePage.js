@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
+import { withRouter } from 'react-router';
 import { bindActionCreators } from "redux";
 import * as courseActions from "../../actions/courseActions";
 import CourseForm from "./CourseForm";
@@ -66,7 +67,7 @@ export class ManageCoursePage extends React.Component {
   redirect(){
     this.setState({saving: false });
     toastr.success('Course saved');
-    this.context.router.push('/courses');
+    this.props.history.push('/courses');
   }
 
   render() {
@@ -84,13 +85,13 @@ export class ManageCoursePage extends React.Component {
 }
 
 ManageCoursePage.propTypes = {
-  course: PropTypes.shape.isRequired,
+  course: PropTypes.object.isRequired,
   authors: PropTypes.arrayOf(PropTypes.shape).isRequired,
-  actions: PropTypes.shape.isRequired,
+  actions: PropTypes.object.isRequired,
 };
 
 ManageCoursePage.contextTypes = {
-  router: PropTypes.shape,
+  router: PropTypes.object,
 };
 
 function getCourseById(courses, id) {
@@ -102,7 +103,7 @@ function getCourseById(courses, id) {
 }
 
 function mapStateToProps(state, ownProps) {
-  const courseId = ownProps.params.id;
+  const courseId = ownProps.match.params.id;
   let course = {
     id: "",
     watchHref: "",
@@ -128,4 +129,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageCoursePage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ManageCoursePage));
