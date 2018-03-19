@@ -1,32 +1,39 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Header from './common/Header';
 import { withRouter } from 'react-router';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { Container, Row, Col } from 'reactstrap';
+import Header from './common/Header';
 import HomePage from './home/HomePage';
 import AboutPage from './about/AboutPage';
 import CoursesPage from './course/CoursesPage';
-import ManageCoursePage from './course/ManageCoursePage'; //eslint-disable-line import/no-named-as-default
+import ManageCoursePage from './course/ManageCoursePage'; // eslint-disable-line import/no-named-as-default
 
-class App extends React.Component {
-  render() {
-    return(
-      <div className='container-fluid'>
-        <Header
-          loading={this.props.loading}
-        />
-        <Route exact path='/' component={HomePage}/>
-        <Route path='/about' component={AboutPage} />
-        <Route path='/courses' component={CoursesPage} />
-        <Route path='/course/:id' component={ManageCoursePage} />
-        <Route exact path='/course' component={ManageCoursePage} />
-        {this.props.children}
-      </div>
-    );
-  }
+function App(props) {
+  return (
+    <Container>
+      <Row>
+        <Col>
+          <Header
+            loading={props.loading}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Route exact path='/' component={HomePage} />
+          <Route path='/about' component={AboutPage} />
+          <Route path='/courses' component={CoursesPage} />
+          <Route path='/course/:id' component={ManageCoursePage} />
+          <Route exact path='/course' component={ManageCoursePage} />
+          {props.children}
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     loading: state.ajaxCallsInProgress > 0,
   };
