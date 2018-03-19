@@ -1,30 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CourseListRow from './CourseListRow';
+import { Table } from 'reactstrap';
+import BookListRow from './BookListRow';
 
-const CourseList = ({courses}) => {
-    return (
-        <table className="table">
-            <thead>
-                <tr>
-                    <th>&nbsp;</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Category</th>
-                    <th>Length</th>
-                </tr>
-            </thead>
-            <tbody> 
-                {courses.map(course =>
-                    <CourseListRow key={course.id} course={course}/>
-                )}
-            </tbody>
-        </table>
-    );
+const BookList = ({ books }) =>
+  <Table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Pages</th>
+      </tr>
+    </thead>
+    <tbody>
+      {books.map(book => (
+        <BookListRow key={book.id} book={books} />
+      ))}
+    </tbody>
+  </Table>;
+
+BookList.propTypes = {
+  books: PropTypes.shape.isRequired,
 };
 
-CourseList.propTypes = {
-    courses: PropTypes.array.isRequired
-};
-
-export default CourseList;
+export default BookList;

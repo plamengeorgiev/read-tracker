@@ -1,14 +1,13 @@
 import React from 'react';
+import { Jumbotron } from 'reactstrap';
 
-class AboutPage extends React.Component{
-    render() {
-        return(
-            <div className="jumbotron">
-                <h1>About</h1>
-                <p>This app uses react</p>
-            </div>
-        );
-    }
+function AboutPage() {
+  return (
+    <Jumbotron>
+      <h1 className='display-3'>About</h1>
+      <p>This app uses react</p>
+    </Jumbotron>
+  );
 }
 
 export default AboutPage;
