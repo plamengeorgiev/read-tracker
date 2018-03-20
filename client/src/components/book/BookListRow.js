@@ -13,7 +13,7 @@ const BookListRow = ({ book }) =>
   </tr>;
 
 BookListRow.propTypes = {
-  book: PropTypes.shape.isRequired,
+  book: PropTypes.object,
 };
 
 export default BookListRow;

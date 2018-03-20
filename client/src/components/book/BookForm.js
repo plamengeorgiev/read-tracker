@@ -6,7 +6,7 @@ import SelectInput from '../common/SelectInput';
 
 const BookForm = ({ book, allAuthors, onSave, onChange, saving, errors }) => (
   <Form>
-    <h1>Manage Course</h1>
+    <h1>Manage Book</h1>
     <TextInput
       name='title'
       label='Title'
@@ -31,8 +31,8 @@ const BookForm = ({ book, allAuthors, onSave, onChange, saving, errors }) => (
       error={errors.category}
     />
     <TextInput
-      name='length'
-      label='Length'
+      name='pages'
+      label='Pages'
       value={book.pages}
       onChange={onChange}
       error={errors.length}
@@ -48,12 +48,12 @@ const BookForm = ({ book, allAuthors, onSave, onChange, saving, errors }) => (
 );
 
 BookForm.propTypes = {
-  book: PropTypes.shape.isRequired,
-  allAuthors: PropTypes.shape.isRequired,
+  book: PropTypes.object,
+  allAuthors: PropTypes.arrayOf(PropTypes.shape).isRequired,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  saving: PropTypes.bool.isRequired,
-  errors: PropTypes.shape.isRequired,
+  saving: PropTypes.bool,
+  errors: PropTypes.object,
 };
 
 export default BookForm;

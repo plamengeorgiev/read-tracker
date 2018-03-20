@@ -5,6 +5,7 @@ import { Route, BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { loadCourses } from './actions/courseActions';
 import { loadAuthors } from './actions/authorActions';
+import { loadBooks } from './actions/bookActions';
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
@@ -14,6 +15,7 @@ import App from './components/App';
 const store = configureStore();
 store.dispatch(loadCourses());
 store.dispatch(loadAuthors());
+store.dispatch(loadBooks());
 
 render(
   <Provider store={store}>

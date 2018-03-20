@@ -4,41 +4,41 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
-import * as courseActions from '../../actions/courseActions';
+import * as bookActions from '../../actions/bookActions';
 import BookForm from './BookForm';
 import { authorsFormattedForDropdown } from '../../selectors/selectors';
 
-export class ManageCoursePage extends React.Component {
+export class ManageBookPage extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      course: Object.assign({}, props.course),
+      book: Object.assign({}, props.book),
       errors: {},
       saving: false,
     };
-    this.updateCourseState = this.updateCourseState.bind(this);
-    this.saveCourse = this.saveCourse.bind(this);
+    this.updateBookState = this.updateBookState.bind(this);
+    this.saveBook = this.saveBook.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.course.id !== nextProps.course.id) {
-      this.setState({ course: Object.assign({}, nextProps.course) });
+    if (this.props.book.id !== nextProps.book.id) {
+      this.setState({ book: Object.assign({}, nextProps.book) });
     }
   }
 
-  updateCourseState(event) {
+  updateBookState(event) {
     const field = event.target.name;
-    const course = Object.assign({}, this.state.course);
-    course[field] = event.target.value;
-    return this.setState({ course });
+    const book = Object.assign({}, this.state.book);
+    book[field] = event.target.value;
+    return this.setState({ book });
   }
 
-  courseFormIsValid() {
+  bookFormIsValid() {
     let formIsValid = true;
     const errors = {};
 
-    if (this.state.course.title.length < 5) {
+    if (this.state.book.title.length < 5) {
       errors.title = 'Title must be at least 5 characters.';
       formIsValid = false;
     }
@@ -47,16 +47,16 @@ export class ManageCoursePage extends React.Component {
     return formIsValid;
   }
 
-  saveCourse(event) {
+  saveBook(event) {
     event.preventDefault();
 
-    if (!this.courseFormIsValid()) {
+    if (!this.bookFormIsValid()) {
       return;
     }
 
     this.setState({ saving: true });
     this.props.actions
-      .saveCourse(this.state.course)
+      .saveBook(this.state.book)
       .then(() => this.redirect())
       .catch((error) => {
         toastr.error(error);
@@ -66,45 +66,45 @@ export class ManageCoursePage extends React.Component {
 
   redirect() {
     this.setState({ saving: false });
-    toastr.success('Course saved');
-    this.props.history.push('/courses');
+    toastr.success('Book saved');
+    this.props.history.push('/books');
   }
 
   render() {
     return (
       <BookForm
         allAuthors={this.props.authors}
-        course={this.state.course}
+        book={this.state.book}
         errors={this.state.errors}
-        onChange={this.updateCourseState}
-        onSave={this.saveCourse}
+        onChange={this.updateBookState}
+        onSave={this.saveBook}
         saving={this.state.saving}
       />
     );
   }
 }
 
-ManageCoursePage.propTypes = {
-  course: PropTypes.shape.isRequired,
+ManageBookPage.propTypes = {
+  book: PropTypes.object,
   authors: PropTypes.arrayOf(PropTypes.shape).isRequired,
-  actions: PropTypes.shape.isRequired,
+  actions: PropTypes.object.isRequired,
 };
 
-ManageCoursePage.contextTypes = {
-  router: PropTypes.shape,
+ManageBookPage.contextTypes = {
+  router: PropTypes.object,
 };
 
-function getCourseById(courses, id) {
-  const course = courses.filter(course => course.id === id);
-  if (course) {
-    return course[0];
+function getBookById(books, id) {
+  const book = books.filter(book => book.id === id);
+  if (book) {
+    return book[0];
   }
   return null;
 }
 
 function mapStateToProps(state, ownProps) {
-  const courseId = ownProps.match.params.id;
-  let course = {
+  const bookId = ownProps.match.params.id;
+  let book = {
     id: '',
     title: '',
     authorId: '',
@@ -112,22 +112,22 @@ function mapStateToProps(state, ownProps) {
     category: '',
   };
 
-  if (courseId && state.courses.length > 0) {
-    course = getCourseById(state.courses, courseId);
+  if (bookId && state.books.length > 0) {
+    book = getBookById(state.books, bookId);
   }
 
   return {
-    course,
+    book,
     authors: authorsFormattedForDropdown(state.authors),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(courseActions, dispatch),
+    actions: bindActionCreators(bookActions, dispatch),
   };
 }
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(ManageCoursePage),
+  connect(mapStateToProps, mapDispatchToProps)(ManageBookPage),
 );

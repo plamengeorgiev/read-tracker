@@ -15,13 +15,14 @@ const BookList = ({ books }) =>
     </thead>
     <tbody>
       {books.map(book => (
-        <BookListRow key={book.id} book={books} />
+        <BookListRow key={book.id} book={book} />
       ))}
     </tbody>
   </Table>;
 
 BookList.propTypes = {
-  books: PropTypes.shape.isRequired,
+  books: PropTypes.array.isRequired,
 };
+
 
 export default BookList;

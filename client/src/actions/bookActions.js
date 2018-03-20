@@ -1,44 +1,44 @@
 import * as types from './actionTypes';
-import courseApi from '../api/mockCourseApi';
+import bookApi from '../api/mockBookApi';
 import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 
-export function loadCoursesSuccess(courses) {
+export function loadBooksSuccess(books) {
   return {
-    type: types.LOAD_COURSES_SUCCESS, courses,
+    type: types.LOAD_BOOKS_SUCCESS, books,
   };
 }
 
-export function createCourseSuccess(course) {
+export function createBookSuccess(book) {
   return {
-    type: types.CREATE_COURSE_SUCCESS, course,
+    type: types.CREATE_BOOK_SUCCESS, book,
   };
 }
 
-export function updateCourseSuccess(course) {
+export function updateBookSuccess(book) {
   return {
-    type: types.UPDATE_COURSE_SUCCESS, course,
+    type: types.UPDATE_BOOK_SUCCESS, book,
   };
 }
 
-export function loadCourses() {
-  return function loadCoursesDispatcher(dispatch) {
+export function loadBooks() {
+  return function loadBooksDispatcher(dispatch) {
     dispatch(beginAjaxCall());
-    return courseApi.getAllCourses().then((courses) => {
-      dispatch(loadCoursesSuccess(courses));
+    return bookApi.getAllBooks().then((books) => {
+      dispatch(loadBooksSuccess(books));
     }).catch((error) => {
       throw (error);
     });
   };
 }
 
-export function saveCourse(course) {
-  return function saveCourseDispatcher(dispatch) {
+export function saveBook(book) {
+  return function saveBookDispatcher(dispatch) {
     dispatch(beginAjaxCall());
-    return courseApi.saveCourse(course).then((savedCourse) => {
-      if (course.id) {
-        dispatch(updateCourseSuccess(savedCourse));
+    return bookApi.saveBook(book).then((savedBook) => {
+      if (book.id) {
+        dispatch(updateBookSuccess(savedBook));
       } else {
-        dispatch(createCourseSuccess(savedCourse));
+        dispatch(createBookSuccess(savedBook));
       }
     }).catch((error) => {
       dispatch(ajaxCallError());

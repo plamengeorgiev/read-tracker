@@ -2,55 +2,58 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as courseActions from '../../actions/courseActions';
-import CourseList from './BookList';
+import * as bookActions from '../../actions/courseActions';
+import BookList from './BookList';
 
 class BooksPage extends React.Component {
-  static courseRow(course, index) {
-    return <div key={index}>{course.title}</div>;
+  static bookRow(book, index) {
+    return <div key={index}>{book.title}</div>;
   }
 
   constructor(props, context) {
     super(props, context);
-    this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
+    this.redirectToAddBookPage = this.redirectToAddBookPage.bind(this);
   }
 
 
-  redirectToAddCoursePage() {
-    this.props.history.push('/course');
+  redirectToAddBookPage() {
+    this.props.history.push('/book');
   }
 
   render() {
-    const { courses } = this.props;
+    const { books } = this.props;
     return (
       <div>
-        <h1>Courses</h1>
+        <h1>Books</h1>
         <input
           type='submit'
           value='Add book'
           className='btn btn-primary'
-          onClick={this.redirectToAddCoursePage}
+          onClick={this.redirectToAddBookPage}
         />
-        <CourseList courses={courses} />
+        <BookList books={books} />
       </div>
     );
   }
 }
 
 BooksPage.propTypes = {
-  courses: PropTypes.shape.isRequired,
-  actions: PropTypes.shape.isRequired,
+  books: PropTypes.arrayOf(PropTypes.shape),
+};
+
+BooksPage.defaultProps = {
+  books: [],
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    courses: state.books,
+    books: state.books,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(courseActions, dispatch)
+    actions: bindActionCreators(bookActions, dispatch),
   };
 }
 

@@ -7,7 +7,9 @@ import Header from './common/Header';
 import HomePage from './home/HomePage';
 import AboutPage from './about/AboutPage';
 import CoursesPage from './course/CoursesPage';
-import ManageCoursePage from './course/ManageCoursePage'; // eslint-disable-line import/no-named-as-default
+import ManageCoursePage from './course/ManageCoursePage';  // eslint-disable-line import/no-named-as-default
+import BooksPage from './book/BooksPage';
+import ManageBookPage from './book/ManageBookPage'; // eslint-disable-line import/no-named-as-default
 
 function App(props) {
   return (
@@ -26,6 +28,9 @@ function App(props) {
           <Route path='/courses' component={CoursesPage} />
           <Route path='/course/:id' component={ManageCoursePage} />
           <Route exact path='/course' component={ManageCoursePage} />
+          <Route path='/books' component={BooksPage} />
+          <Route path='/book/:id' component={ManageBookPage} />
+          <Route exact path='/book' component={ManageBookPage} />
           {props.children}
         </Col>
       </Row>

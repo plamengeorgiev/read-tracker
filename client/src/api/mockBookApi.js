@@ -18,7 +18,7 @@ function replaceAll(str, find, replace) {
 }
 
 // This would be performed on the server in a real app. Just stubbing in.
-const generateId = course => replaceAll(course.title, ' ', '-');
+const generateId = book => replaceAll(book.title, ' ', '-');
 
 class BookApi {
   static getAllBooks() {
