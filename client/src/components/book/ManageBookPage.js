@@ -85,13 +85,17 @@ export class ManageBookPage extends React.Component {
 }
 
 ManageBookPage.propTypes = {
-  book: PropTypes.object,
+  book: PropTypes.shape(),
   authors: PropTypes.arrayOf(PropTypes.shape).isRequired,
-  actions: PropTypes.object.isRequired,
+  actions: PropTypes.shape().isRequired,
+};
+
+ManageBookPage.defaultProps = {
+  book: {},
 };
 
 ManageBookPage.contextTypes = {
-  router: PropTypes.object,
+  router: PropTypes.shape(),
 };
 
 function getBookById(books, id) {

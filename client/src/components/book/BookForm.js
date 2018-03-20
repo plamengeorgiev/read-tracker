@@ -48,12 +48,19 @@ const BookForm = ({ book, allAuthors, onSave, onChange, saving, errors }) => (
 );
 
 BookForm.propTypes = {
-  book: PropTypes.object,
+  book: PropTypes.shape(),
   allAuthors: PropTypes.arrayOf(PropTypes.shape).isRequired,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   saving: PropTypes.bool,
-  errors: PropTypes.object,
+  errors: PropTypes.shape(),
+};
+
+
+BookForm.defaultProps = {
+  book: {},
+  saving: false,
+  errors: {},
 };
 
 export default BookForm;

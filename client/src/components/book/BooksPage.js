@@ -38,7 +38,7 @@ class BooksPage extends React.Component {
 }
 
 BooksPage.propTypes = {
-  books: PropTypes.arrayOf(PropTypes.shape),
+  books: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 BooksPage.defaultProps = {

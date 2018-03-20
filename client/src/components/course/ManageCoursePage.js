@@ -91,7 +91,7 @@ ManageCoursePage.propTypes = {
 };
 
 ManageCoursePage.contextTypes = {
-  router: PropTypes.object,
+  router: PropTypes.shape(),
 };
 
 function getCourseById(courses, id) {

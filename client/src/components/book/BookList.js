@@ -21,7 +21,7 @@ const BookList = ({ books }) =>
   </Table>;
 
 BookList.propTypes = {
-  books: PropTypes.array.isRequired,
+  books: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 
