@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
 import * as bookActions from '../../actions/bookActions';
 import BookForm from './BookForm';
-import { authorsFormattedForDropdown } from '../../selectors/selectors';
+import authorsFormattedForDropdown from '../../selectors/selectors';
 
 export class ManageBookPage extends React.Component {
   constructor(props, context) {
