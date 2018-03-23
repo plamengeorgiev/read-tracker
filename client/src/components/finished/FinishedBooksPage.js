@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as bookActions from '../../actions/courseActions';
+import * as bookActions from '../../actions/bookActions';
 import BookList from './BookList';
 
-class BooksPage extends React.Component {
+class FinishedBooksPage extends React.Component {
   static bookRow(book, index) {
     return <div key={index}>{book.title}</div>;
   }
@@ -37,11 +37,11 @@ class BooksPage extends React.Component {
   }
 }
 
-BooksPage.propTypes = {
+FinishedBooksPage.propTypes = {
   books: PropTypes.arrayOf(PropTypes.shape()),
 };
 
-BooksPage.defaultProps = {
+FinishedBooksPage.defaultProps = {
   books: [],
 };
 
@@ -57,4 +57,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BooksPage);
+export default connect(mapStateToProps, mapDispatchToProps)(FinishedBooksPage);

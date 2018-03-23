@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const BookListRow = ({ book }) =>
   <tr>
     <td>
-      <Link to={`/book/${book.id}`}>{book.title}</Link>
+      <Link to={`/reading/${book.id}`}>{book.title}</Link>
     </td>
     <td>{book.authorId}</td>
     <td>{book.category}</td>
